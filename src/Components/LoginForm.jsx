@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import REGEX_VALIDATION from '../helpers/constants';
+import { fetchToken } from '../services/api';
+import { setLocalStorage } from '../services/localStorage';
 import { setEmail } from '../redux/reducers/player';
 import store from '../redux/store';
 
@@ -9,6 +12,8 @@ function LoginForm() {
     email: '',
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  const history = useHistory();
 
   useEffect(() => {
     const { name, email } = playerInfos;
@@ -25,9 +30,12 @@ function LoginForm() {
     }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    const token = await fetchToken();
+    setLocalStorage('token', token);
     store.dispatch(setEmail(playerInfos.email));
+    history.push('/game');
   }
   return (
     <form type="submit" onSubmit={ handleSubmit }>
