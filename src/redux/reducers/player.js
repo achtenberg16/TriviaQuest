@@ -9,8 +9,8 @@ const player = createSlice({
     gravatarEmail: '',
   },
   reducers: {
-    setEmail(state, action) {
-      state.gravatarEmail = action.paylod.email;
+    setEmail(state, email) {
+      state.gravatarEmail = email;
     },
   },
 });
