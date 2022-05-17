@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import REGEX_VALIDATION from '../helpers/constants';
 import { setEmail } from '../redux/reducers/player';
 import store from '../redux/store';
 
@@ -8,6 +8,15 @@ function LoginForm() {
     name: '',
     email: '',
   });
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  useEffect(() => {
+    const { name, email } = playerInfos;
+    const MIN_SIZE_NAME = 3;
+    const enableButton = REGEX_VALIDATION.email.test(email)
+    && name.length >= MIN_SIZE_NAME;
+    setIsButtonDisabled(!enableButton);
+  }, [playerInfos]);
 
   function handleChange({ target: { name, value } }) {
     setPlayerInfos((prevState) => ({
@@ -40,6 +49,7 @@ function LoginForm() {
       <button
         type="submit"
         data-testid="btn-play"
+        disabled={ isButtonDisabled }
       >
         Play
       </button>
