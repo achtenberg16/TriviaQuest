@@ -33,6 +33,7 @@ function LoginForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     const token = await fetchToken();
+    console.log(token);
     setLocalStorage('token', token);
     store.dispatch(setEmail(playerInfos.email));
     history.push('/game');
@@ -60,6 +61,13 @@ function LoginForm() {
         disabled={ isButtonDisabled }
       >
         Play
+      </button>
+      <button
+        data-testid="btn-settings"
+        type="button"
+        onClick={ () => history.push('/settings') }
+      >
+        settings
       </button>
     </form>
   );

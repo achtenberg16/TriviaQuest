@@ -5,6 +5,7 @@ import App from '../App';
 import userEvent from "@testing-library/user-event";
 import { TOKEN_ENPOINT } from "../helpers/constants";
 
+
 describe('1 - Login Screen', () => {
     beforeEach(()=> renderWithRouter(<App />));
 
@@ -26,7 +27,7 @@ describe('1 - Login Screen', () => {
     expect(screen.getByTestId("input-gravatar-email").value).toBe('ale1000@gmail.com');
   })
 
-  it('there is a play button', async() => {
+  it('there is a play button', async () => {
     global.fetch = jest.fn();
     fetch.mockResolvedValue({
       status: 200,
@@ -47,8 +48,8 @@ describe('1 - Login Screen', () => {
     expect(fetch).toHaveBeenCalledWith(TOKEN_ENPOINT);
 
     const game = await screen.findByText('game')
+    expect(game).toBeVisible()
     expect(localStorage.getItem('token')).toBe('ea26fc847f769da555987722608af7c80c54694264e5823d5c9b835d4593611b');
-    
   })
 
 })
