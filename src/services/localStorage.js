@@ -1,5 +1,4 @@
 export function setLocalStorage(key, value) {
-  console.log('rodou', value);
   localStorage.setItem(key, value);
 }
 
