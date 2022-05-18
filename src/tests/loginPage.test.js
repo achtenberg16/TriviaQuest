@@ -4,7 +4,7 @@ import renderWithRouter from './renderWithRouter';
 import App from '../App';
 import userEvent from "@testing-library/user-event";
 import { TOKEN_ENPOINT } from "../helpers/constants";
-import { mockFetchToken } from './mocks/fetchMock';
+import { mockFetchToken, questionsResponse } from './mocks/fetchMock';
 
 
 const TEST_ID = {
@@ -39,14 +39,14 @@ describe('1 - Login Screen', () => {
 
   it('there is a play button', async () => {
     global.fetch = jest.fn();
-    fetch.mockResolvedValueOnce(mockFetchToken);
+    fetch.mockResolvedValueOnce(mockFetchToken).mockResolvedValueOnce({json: async () => questionsResponse});
     const buttonPlay = screen.getByTestId(TEST_ID.buttonPlay);
     expect(buttonPlay).toBeInTheDocument();
     userEvent.type(screen.getByTestId(TEST_ID.inputName), VALUES.name);
     userEvent.type(screen.getByTestId(TEST_ID.inputEmail), VALUES.email);
     userEvent.click(buttonPlay);
     expect(fetch).toHaveBeenCalledWith(TOKEN_ENPOINT);
-    expect(await screen.findByText('game')).toBeVisible()
+    expect(await screen.findByText('Alessandro')).toBeVisible()
     expect(localStorage.getItem('token')).toBe(VALUES.token);
   })
 
