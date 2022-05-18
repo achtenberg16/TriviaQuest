@@ -52,4 +52,13 @@ describe('1 - Login Screen', () => {
     expect(localStorage.getItem('token')).toBe('ea26fc847f769da555987722608af7c80c54694264e5823d5c9b835d4593611b');
   })
 
+  it('test the settings button', async() => {
+    const btn = screen.getByTestId("btn-settings")
+    expect(btn).toBeInTheDocument();
+
+    userEvent.click(btn);
+    const settings = await screen.findByText('Settings')
+    expect(settings).toBeVisible()
+  })
+
 })
