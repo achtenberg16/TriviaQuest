@@ -11,5 +11,6 @@ export const CONSTANT_POINT = 10;
 export const HARD_POINT = 3;
 export const MEDIUM_POINT = 2;
 export const EASY_POINT = 1;
+export const NUMBER_OF_QUESTIONS = 4;
 
 export default REGEX_VALIDATION;
