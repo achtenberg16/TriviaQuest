@@ -32,7 +32,17 @@ describe('1 - Game Screen', () => {
   it('check if the questions are on the screen', async() => {
     expect(await screen.findByTestId(/wrong-answer/)).toBeVisible()
     expect(await screen.findByTestId(/correct-answer/)).toBeVisible()
-  })
+    userEvent.click(screen.getByTestId(/wrong-answer/));
+    expect((await screen.findByTestId(/wrong-answer/)).classList[0]).toBe('incorrect-answer')
+    expect((await screen.findByTestId(/correct-answer/)).classList[0]).toBe('correct-answer')
+    expect(screen.getByTestId(/correct-answer/)).toHaveAttribute('disabled')
+   })
 
-  it
+   it('check if next button is correct', async() => {
+    expect(await screen.findByTestId(/wrong-answer/)).toBeVisible()
+    userEvent.click(screen.getByTestId(/wrong-answer/));
+    userEvent.click(screen.getByTestId('btn-next'))
+    expect(await screen.findByTestId(/wrong-answer-0/)).toBeVisible()
+    
+   })
 })
