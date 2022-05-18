@@ -4,59 +4,56 @@ import renderWithRouter from './renderWithRouter';
 import App from '../App';
 import userEvent from "@testing-library/user-event";
 import { TOKEN_ENPOINT } from "../helpers/constants";
+import { mockFetchToken } from './mocks/fetchMock';
 
+
+const TEST_ID = {
+  inputName: "input-player-name",
+  inputEmail: "input-gravatar-email",
+  buttonSettings: "btn-settings",
+  buttonPlay: "btn-play",
+}
+
+const VALUES = {
+  name: 'Alessandro',
+  email: 'ale1000@gmail.com',
+  token: 'ea26fc847f769da555987722608af7c80c54694264e5823d5c9b835d4593611b'
+}
 
 describe('1 - Login Screen', () => {
     beforeEach(()=> renderWithRouter(<App />));
 
   it('possible to write the name', () => {
-    const nameField = screen.getByTestId("input-player-name")
+    const nameField = screen.getByTestId(TEST_ID.inputName);
     expect(nameField).toBeInTheDocument();
-
-    userEvent.type(nameField, 'Alessandro');
-    expect(screen.getByTestId("input-player-name").value).toBe('Alessandro');
-
-    
+    userEvent.type(nameField, VALUES.name);
+    expect(screen.getByTestId(TEST_ID.inputName).value).toBe(VALUES.name);
   })
 
   it('possible to write the email', () => {  
-    const emailField = screen.getByTestId("input-gravatar-email")
+    const emailField = screen.getByTestId(TEST_ID.inputEmail);
     expect(emailField).toBeInTheDocument();
-
-    userEvent.type(emailField, 'ale1000@gmail.com');
-    expect(screen.getByTestId("input-gravatar-email").value).toBe('ale1000@gmail.com');
+    userEvent.type(emailField, VALUES.email);
+    expect(screen.getByTestId(TEST_ID.inputEmail).value).toBe(VALUES.email);
   })
 
   it('there is a play button', async () => {
     global.fetch = jest.fn();
-    fetch.mockResolvedValue({
-      status: 200,
-      json: async () => ({
-      response_code: 0,
-      response_message: 'Token Generated Successfully!',
-      token: 'ea26fc847f769da555987722608af7c80c54694264e5823d5c9b835d4593611b',
-      }),
-    }); 
-
-    const btn = screen.getByTestId("btn-play")
-    expect(btn).toBeInTheDocument();
-
-    userEvent.type(screen.getByTestId("input-player-name"), 'Alessandro');
-    userEvent.type(screen.getByTestId("input-gravatar-email"), 'ale1000@gmail.com');
-    userEvent.click(btn);
-    
+    fetch.mockResolvedValueOnce(mockFetchToken);
+    const buttonPlay = screen.getByTestId(TEST_ID.buttonPlay);
+    expect(buttonPlay).toBeInTheDocument();
+    userEvent.type(screen.getByTestId(TEST_ID.inputName), VALUES.name);
+    userEvent.type(screen.getByTestId(TEST_ID.inputEmail), VALUES.email);
+    userEvent.click(buttonPlay);
     expect(fetch).toHaveBeenCalledWith(TOKEN_ENPOINT);
-
-    const game = await screen.findByText('game')
-    expect(game).toBeVisible()
-    expect(localStorage.getItem('token')).toBe('ea26fc847f769da555987722608af7c80c54694264e5823d5c9b835d4593611b');
+    expect(await screen.findByText('game')).toBeVisible()
+    expect(localStorage.getItem('token')).toBe(VALUES.token);
   })
 
   it('test the settings button', async() => {
-    const btn = screen.getByTestId("btn-settings")
-    expect(btn).toBeInTheDocument();
-
-    userEvent.click(btn);
+    const buttonSettings = screen.getByTestId(TEST_ID.buttonSettings);
+    expect(buttonSettings).toBeInTheDocument();
+    userEvent.click(buttonSettings);
     const settings = await screen.findByText('Settings')
     expect(settings).toBeVisible()
   })
