@@ -32,22 +32,22 @@ function Questions() {
       <div>
         <p data-testid="question-category">{results[i].category}</p>
         <h1 data-testid="question-text">{results[i].question}</h1>
-        <div data-testid="answer-options" />
-        {console.log(answersShuffled) }
-        {answersShuffled.map((ans) => {
-          let testid = 'correct-answer';
-          if (ans !== results[i].correct_answer) {
-            testid = `wrong-answer-${index}`;
-            index += 1;
-          }
-          return (<Options
-            key={ ans }
-            answer={ ans }
-            testid={ testid }
-            handleClick={ handleClick }
-            isAnswered={ isAnswered }
-          />);
-        })}
+        <div data-testid="answer-options">
+          {answersShuffled.map((ans) => {
+            let testid = 'correct-answer';
+            if (ans !== results[i].correct_answer) {
+              testid = `wrong-answer-${index}`;
+              index += 1;
+            }
+            return (<Options
+              key={ ans }
+              answer={ ans }
+              testid={ testid }
+              handleClick={ handleClick }
+              isAnswered={ isAnswered }
+            />);
+          })}
+        </div>
 
       </div>)
 
