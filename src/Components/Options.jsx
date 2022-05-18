@@ -20,7 +20,7 @@ function Options(props) {
       data-testid={ testid }
       className={ isAnswered ? className : null }
       onClick={ handleClick }
-      disabled={ time === 0 }
+      disabled={ time === 0 || isAnswered }
     >
       {answer}
     </button>);

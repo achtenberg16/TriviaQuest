@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import shuffleArray from '../helpers/functions';
+import { shuffleArray, changeScore } from '../helpers/functions';
 import Options from './Options';
 import useTimer from '../Hooks/useTimer';
 import store from '../redux/store';
+import NextButton from './NextButton';
 import { setIsAnswered } from '../redux/reducers/questions';
 
 function Questions() {
-  const [time] = useTimer();
   const { results, questionNumber: i } = useSelector((state) => state.questions);
+  const [time] = useTimer();
+  const { score } = useSelector((state) => state.player);
   const [answersShuffled, setAnswersShuffled] = useState([]);
 
   let index = 0;
@@ -20,9 +22,11 @@ function Questions() {
     }
   }, [results, i]);
 
-  function handleClick() {
+  function handleClick(testid) {
     store.dispatch(setIsAnswered(true));
+    if (testid === 'correct-answer') changeScore(time, results[i].difficulty, score);
   }
+
   return (
     (results !== undefined)
     && (
@@ -40,12 +44,13 @@ function Questions() {
               key={ ans }
               answer={ ans }
               testid={ testid }
-              handleClick={ handleClick }
+              handleClick={ () => handleClick(testid) }
             />);
           })}
         </div>
         {time}
-
+        {' '}
+        <NextButton />
       </div>)
 
   );
