@@ -4,9 +4,9 @@ import { getLocalStorage } from '../services/localStorage';
 
 function Ranking() {
   const history = useHistory();
-  const ranking = JSON.parse(getLocalStorage('ranking')) || [];
+  const ranking = JSON.parse(getLocalStorage('ranking'));
   ranking.sort((a, b) => b.score - a.score);
-  console.log(ranking);
+
   return (
     <div>
       <h1 data-testid="ranking-title"> Ranking</h1>

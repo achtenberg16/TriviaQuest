@@ -56,6 +56,7 @@ describe('2 - Game Screen', () => {
     userEvent.click(screen.getByTestId(TEST_ID.buttonPlay));
     expect(await screen.findByText(/Play/i)).toBeVisible()
   })
+  
   it('assertions store is correct', async() => {
     global.fetch = jest.fn();
     fetch.mockResolvedValueOnce(mockFetchToken).mockResolvedValueOnce({json: async () => questionsResponse});

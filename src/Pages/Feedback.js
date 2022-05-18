@@ -6,7 +6,7 @@ import RankingBtn from '../Components/RankingBtn';
 
 function Feedback() {
   return (
-    <div data-testid="feedback-text">
+    <div>
       <Header />
       <FeedbackMsg />
       <PlayAgainBtn />
