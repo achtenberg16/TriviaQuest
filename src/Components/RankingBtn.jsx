@@ -10,12 +10,12 @@ function RankingBtn() {
   const hashEmail = md5(player.gravatarEmail).toString();
   const pictureUrl = `https://www.gravatar.com/avatar/${hashEmail}?d=identicon`;
   useEffect(() => {
-    const prevRank = getLocalStorage('ranking') || [];
+    const prevRank = JSON.parse(getLocalStorage('ranking')) || [];
     const newRank = [...prevRank, { name: player.name,
       score:
       player.score,
       picture: pictureUrl }];
-    setLocalStorage(JSON.stringify(newRank));
+    setLocalStorage('ranking', JSON.stringify(newRank));
   }, []);
   return (
     <button

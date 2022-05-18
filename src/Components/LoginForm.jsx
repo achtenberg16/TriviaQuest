@@ -3,9 +3,10 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import REGEX_VALIDATION from '../helpers/constants';
 import { fetchToken } from '../services/api';
 import { setLocalStorage } from '../services/localStorage';
-import { setEmail, setName } from '../redux/reducers/player';
+import { setEmail, setName, setAssertions, setScore } from '../redux/reducers/player';
 import store from '../redux/store';
 import Input from './Input';
+import { setQuestionNumber } from '../redux/reducers/questions';
 
 function LoginForm() {
   const [playerInfos, setPlayerInfos] = useState({
@@ -23,6 +24,12 @@ function LoginForm() {
     && name.length >= MIN_SIZE_NAME;
     setIsButtonDisabled(!enableButton);
   }, [playerInfos]);
+
+  useEffect(() => {
+    store.dispatch(setQuestionNumber(0));
+    store.dispatch(setScore(0));
+    store.dispatch(setAssertions(0));
+  }, []);
 
   function handleChange({ target: { name, value } }) {
     setPlayerInfos((prevState) => ({
