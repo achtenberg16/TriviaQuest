@@ -1,5 +1,5 @@
 import React from "react";
-import { screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 import userEvent from "@testing-library/user-event";
@@ -63,10 +63,31 @@ describe('2 - Game Screen', () => {
     userEvent.type(screen.getByTestId(TEST_ID.inputName), VALUES.name);
     userEvent.type(screen.getByTestId(TEST_ID.inputEmail), VALUES.email);
     userEvent.click(screen.getByTestId(TEST_ID.buttonPlay));
+    jest.setTimeout(40000)
+    await act(async() => {
+        await new Promise((r) => setTimeout(r, 30000));
+      expect(await screen.findByText('0')).toBeVisible()
+    })
     userEvent.click(await screen.findByTestId(/correct-answer/))
     userEvent.click(screen.getByTestId('btn-next'))
     const assertions = store.getState().player.assertions
     expect(assertions).toBe(1)
+  })
+
+  it('', async () => {
+    global.fetch = jest.fn();
+    fetch.mockResolvedValueOnce(mockFetchToken).mockResolvedValueOnce({json: async () => questionsResponse});
+    const { store } = renderWithRouter(<App />)
+    userEvent.type(screen.getByTestId(TEST_ID.inputName), VALUES.name);
+    userEvent.type(screen.getByTestId(TEST_ID.inputEmail), VALUES.email);
+    userEvent.click(screen.getByTestId(TEST_ID.buttonPlay));
+    jest.setTimeout(5000)
+    await act(async() => {
+        await new Promise((r) => setTimeout(r, 2000));
+      expect(await screen.findByText('28')).toBeVisible()
+      userEvent.click(screen.getByTestId(/wrong-answer-0/));
+      await new Promise((r) => setTimeout(r, 2000));
+    })
   })
 })
 
