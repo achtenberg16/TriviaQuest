@@ -98,16 +98,20 @@ describe.only('6 - [TELA DE JOGO] Crie a página de jogo que deve conter as info
     });
   });
 
-  it.only('Será validado se as alternativas estão posicionadas em ordem aleatória', () => {
+  it('Será validado se as alternativas estão posicionadas em ordem aleatória', () => {
     const answersList = [];
     cy.get(ALL_ALTERNATIVES_SELECTOR).then(() => {
       for (let i = 0; i < 5; i += 1) {
         loadQuestionsPage();
         cy.get(ALL_ALTERNATIVES_SELECTOR).then((newAnswersSection) => {
+<<<<<<< HEAD
           console.log(newAnswersSection.prevObject[0].children)
           const newAnswers = Array.from(newAnswersSection.children()).map((answer,) => {
           return  answer.dataset.testi});
   
+=======
+          const newAnswers = Array.from(newAnswersSection.children()).map((answer) => answer.dataset.testid);
+>>>>>>> fd6473e0156e651e975892a4167eceb8a67d9434
           const currentIndex = newAnswers.indexOf('correct-answer');
           answersList.push(currentIndex);
         });

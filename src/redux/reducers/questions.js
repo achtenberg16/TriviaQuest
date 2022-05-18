@@ -5,6 +5,7 @@ const questions = createSlice({
   initialState: {
     results: undefined,
     questionNumber: 0,
+    isAnswered: false,
   },
   reducers: {
     setQuestions(state, action) {
@@ -13,8 +14,11 @@ const questions = createSlice({
     setQuestionNumber(state, action) {
       state.questionNumber = action.payload;
     },
+    setIsAnswered(state, action) {
+      state.isAnswered = action.payload;
+    },
   },
 });
 
-export const { setQuestions, setQuestionNumber } = questions.actions;
+export const { setQuestions, setQuestionNumber, setIsAnswered } = questions.actions;
 export default questions.reducer;
