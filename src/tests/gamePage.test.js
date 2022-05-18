@@ -74,7 +74,7 @@ describe('2 - Game Screen', () => {
     expect(assertions).toBe(1)
   })
 
-  it('', async () => {
+  it('test timer', async () => {
     global.fetch = jest.fn();
     fetch.mockResolvedValueOnce(mockFetchToken).mockResolvedValueOnce({json: async () => questionsResponse});
     const { store } = renderWithRouter(<App />)
