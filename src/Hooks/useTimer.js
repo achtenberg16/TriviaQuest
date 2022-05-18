@@ -4,7 +4,7 @@ import { INITIAL_TIME, ONE_SECOND } from '../helpers/constants';
 
 function useTimer() {
   const [time, setTime] = useState(INITIAL_TIME);
-  const { isAnswered } = useSelector((state) => state.questions);
+  const { isAnswered, questionNumber } = useSelector((state) => state.questions);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -15,6 +15,10 @@ function useTimer() {
 
     return () => clearInterval(interval);
   }, [time, isAnswered]);
+
+  useEffect(() => {
+    setTime(INITIAL_TIME);
+  }, [questionNumber]);
 
   return (
     [time]

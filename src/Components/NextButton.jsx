@@ -11,7 +11,7 @@ function NextButton() {
 
   function handleClick() {
     store.dispatch(setIsAnswered(false));
-    console.log(i);
+
     if (i === NUMBER_OF_QUESTIONS) {
       history.push('/feedback');
     } else {
