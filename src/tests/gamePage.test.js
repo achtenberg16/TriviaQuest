@@ -3,8 +3,7 @@ import { screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 import userEvent from "@testing-library/user-event";
-import { TOKEN_ENPOINT } from "../helpers/constants";
-import { mockFetchToken, questionsResponse } from './mocks/fetchMock';
+import { mockFetchToken, questionsResponse, invalidTokenQuestionsResponse } from './mocks/fetchMock';
 
 
 const TEST_ID = {
@@ -32,7 +31,7 @@ describe('1 - Game Screen', () => {
   it('check if the questions are on the screen', async() => {
     expect(await screen.findByTestId(/wrong-answer/)).toBeVisible()
     expect(await screen.findByTestId(/correct-answer/)).toBeVisible()
-    userEvent.click(screen.getByTestId(/wrong-answer/));
+    userEvent.click(screen.getByTestId(/correct-answer/));
     expect((await screen.findByTestId(/wrong-answer/)).classList[0]).toBe('incorrect-answer')
     expect((await screen.findByTestId(/correct-answer/)).classList[0]).toBe('correct-answer')
     expect(screen.getByTestId(/correct-answer/)).toHaveAttribute('disabled')
@@ -45,4 +44,16 @@ describe('1 - Game Screen', () => {
     expect(await screen.findByTestId(/wrong-answer-0/)).toBeVisible()
     
    })
+})
+
+describe('2 - Game Screen', () => {
+  it('when receiving an invalid token', async() => {
+    global.fetch = jest.fn();
+    fetch.mockResolvedValueOnce(mockFetchToken).mockResolvedValueOnce({json: async () => invalidTokenQuestionsResponse});
+    renderWithRouter(<App />)
+    userEvent.type(screen.getByTestId(TEST_ID.inputName), VALUES.name);
+    userEvent.type(screen.getByTestId(TEST_ID.inputEmail), VALUES.email);
+    userEvent.click(screen.getByTestId(TEST_ID.buttonPlay));
+    expect(await screen.findByText(/Play/i)).toBeVisible()
+  })
 })

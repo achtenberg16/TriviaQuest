@@ -72,3 +72,8 @@ export const questionsResponse = {
   ],
 };
 
+
+export const invalidTokenQuestionsResponse = {
+  response_code: 3,
+  results: [],
+}
