@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import REGEX_VALIDATION from '../helpers/constants';
 import { fetchToken } from '../services/api';
 import { setLocalStorage } from '../services/localStorage';
-import { setEmail } from '../redux/reducers/player';
+import { setEmail, setName } from '../redux/reducers/player';
 import store from '../redux/store';
 
 function LoginForm() {
@@ -36,6 +36,7 @@ function LoginForm() {
     console.log(token);
     setLocalStorage('token', token);
     store.dispatch(setEmail(playerInfos.email));
+    store.dispatch(setName(playerInfos.name));
     history.push('/game');
   }
   return (

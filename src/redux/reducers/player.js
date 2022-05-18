@@ -12,8 +12,11 @@ const player = createSlice({
     setEmail(state, action) {
       state.gravatarEmail = action.payload;
     },
+    setName(state, action) {
+      state.name = action.payload;
+    },
   },
 });
 
-export const { setEmail } = player.actions;
+export const { setEmail, setName } = player.actions;
 export default player.reducer;

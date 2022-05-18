@@ -1,8 +1,12 @@
 import React from 'react';
+import Header from '../Components/Header';
 
 function Game() {
   return (
-    <p>game</p>
+    <div>
+      <Header />
+      <p>game</p>
+    </div>
   );
 }
 
