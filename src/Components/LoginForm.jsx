@@ -5,6 +5,7 @@ import { fetchToken } from '../services/api';
 import { setLocalStorage } from '../services/localStorage';
 import { setEmail, setName } from '../redux/reducers/player';
 import store from '../redux/store';
+import Input from './Input';
 
 function LoginForm() {
   const [playerInfos, setPlayerInfos] = useState({
@@ -33,7 +34,6 @@ function LoginForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     const token = await fetchToken();
-    console.log(token);
     setLocalStorage('token', token);
     store.dispatch(setEmail(playerInfos.email));
     store.dispatch(setName(playerInfos.name));
@@ -41,19 +41,23 @@ function LoginForm() {
   }
   return (
     <form type="submit" onSubmit={ handleSubmit }>
-      <input
+
+      <Input
         type="text"
-        data-testid="input-player-name"
+        testID="input-player-name"
         onChange={ handleChange }
         value={ playerInfos.name }
         name="name"
+        placeholder="Digite seu Nome:"
       />
-      <input
+
+      <Input
         type="text"
-        data-testid="input-gravatar-email"
+        testID="input-gravatar-email"
         onChange={ handleChange }
         value={ playerInfos.email }
         name="email"
+        placeholder="Digite seu e-mail"
       />
 
       <button
@@ -63,6 +67,7 @@ function LoginForm() {
       >
         Play
       </button>
+
       <button
         data-testid="btn-settings"
         type="button"
