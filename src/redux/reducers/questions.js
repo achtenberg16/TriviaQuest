@@ -3,15 +3,18 @@ import { createSlice } from '@reduxjs/toolkit';
 const questions = createSlice({
   name: 'questions',
   initialState: {
-    response_code: 0,
-    results: [],
+    results: undefined,
+    questionNumber: 0,
   },
   reducers: {
     setQuestions(state, action) {
-      state = action.payload;
+      state.results = action.payload;
+    },
+    setQuestionNumber(state, action) {
+      state.questionNumber = action.payload;
     },
   },
 });
 
-export const { setQuestions } = questions.actions;
+export const { setQuestions, setQuestionNumber } = questions.actions;
 export default questions.reducer;

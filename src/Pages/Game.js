@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../Components/Header';
+import Questions from '../Components/Questions';
 import { INVALID_TOKEN_CODE } from '../helpers/constants';
 import { setQuestions } from '../redux/reducers/questions';
 import store from '../redux/store';
@@ -15,19 +16,22 @@ function Game() {
 
     async function getQuestions() {
       const { response_code: code, results } = await fetchQuestions(token);
+
       if (code === INVALID_TOKEN_CODE) {
         history.push('/');
         return;
       }
+
       store.dispatch(setQuestions(results));
     }
+
     getQuestions();
   }, [history]);
 
   return (
     <div>
       <Header />
-      <p>game</p>
+      <Questions />
     </div>
   );
 }
