@@ -77,7 +77,7 @@ describe('2 - Game Screen', () => {
   it('test timer', async () => {
     global.fetch = jest.fn();
     fetch.mockResolvedValueOnce(mockFetchToken).mockResolvedValueOnce({json: async () => questionsResponse});
-    const { store } = renderWithRouter(<App />)
+    renderWithRouter(<App />)
     userEvent.type(screen.getByTestId(TEST_ID.inputName), VALUES.name);
     userEvent.type(screen.getByTestId(TEST_ID.inputEmail), VALUES.email);
     userEvent.click(screen.getByTestId(TEST_ID.buttonPlay));
