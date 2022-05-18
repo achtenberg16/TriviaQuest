@@ -1,30 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import shuffleArray from '../helpers/functions';
 import Options from './Options';
-// import store from '../redux/store';
-// import { setQuestionNumber } from '../redux/reducers/questions';
+import useTimer from '../Hooks/useTimer';
+import store from '../redux/store';
+import { setIsAnswered } from '../redux/reducers/questions';
 
 function Questions() {
+  const [time] = useTimer();
   const { results, questionNumber: i } = useSelector((state) => state.questions);
-  const [isAnswered, setIsAnswered] = useState(false);
-  let answersShuffled = [];
+  const [answersShuffled, setAnswersShuffled] = useState([]);
+
   let index = 0;
 
-  if (results !== undefined) {
-    const answers = [results[i].correct_answer, ...results[i].incorrect_answers];
-
-    answersShuffled = shuffleArray(answers);
-  }
-
-  // function changeQuestion() {
-  //   setIsAnswered(false);
-  //   store.dispatch(setQuestionNumber(i + 1));
-  // }
+  useEffect(() => {
+    if (results !== undefined) {
+      const answers = [results[i].correct_answer, ...results[i].incorrect_answers];
+      setAnswersShuffled(shuffleArray(answers));
+    }
+  }, [results, i]);
 
   function handleClick() {
-    setIsAnswered(true);
-    // changeQuestion();
+    store.dispatch(setIsAnswered(true));
   }
   return (
     (results !== undefined)
@@ -44,10 +41,10 @@ function Questions() {
               answer={ ans }
               testid={ testid }
               handleClick={ handleClick }
-              isAnswered={ isAnswered }
             />);
           })}
         </div>
+        {time}
 
       </div>)
 
