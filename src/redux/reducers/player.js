@@ -5,7 +5,7 @@ const player = createSlice({
   initialState: {
     name: '',
     assertions: 0,
-    score: '',
+    score: 0,
     gravatarEmail: '',
   },
   reducers: {
