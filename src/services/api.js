@@ -1,4 +1,4 @@
-import { TOKEN_ENPOINT } from '../helpers/constants';
+import { TOKEN_ENPOINT, QUESTIONS_ENDPOINT } from '../helpers/constants';
 
 export async function fetchToken() {
   const response = await fetch(TOKEN_ENPOINT);
@@ -6,4 +6,8 @@ export async function fetchToken() {
   return data.token;
 }
 
-export default fetchToken;
+export async function fetchQuestions(token) {
+  const response = await fetch(`${QUESTIONS_ENDPOINT}${token}`);
+  const data = await response.json();
+  return data;
+}
