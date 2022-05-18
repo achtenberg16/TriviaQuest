@@ -6,9 +6,11 @@ import useTimer from '../Hooks/useTimer';
 import store from '../redux/store';
 import NextButton from './NextButton';
 import { setIsAnswered } from '../redux/reducers/questions';
+import { setAssertions } from '../redux/reducers/player';
 
 function Questions() {
   const { results, questionNumber: i } = useSelector((state) => state.questions);
+  const { assertions } = useSelector((state) => state.player);
   const [time] = useTimer();
   const { score } = useSelector((state) => state.player);
   const [answersShuffled, setAnswersShuffled] = useState([]);
@@ -24,7 +26,10 @@ function Questions() {
 
   function handleClick(testid) {
     store.dispatch(setIsAnswered(true));
-    if (testid === 'correct-answer') changeScore(time, results[i].difficulty, score);
+    if (testid === 'correct-answer') {
+      changeScore(time, results[i].difficulty, score);
+      store.dispatch(setAssertions(assertions + 1));
+    }
   }
 
   return (

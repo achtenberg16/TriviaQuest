@@ -2,11 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { NUMBER_OF_QUESTIONS } from '../helpers/constants';
+import useTimer from '../Hooks/useTimer';
 import { setIsAnswered, setQuestionNumber } from '../redux/reducers/questions';
 import store from '../redux/store';
 
 function NextButton() {
   const { questionNumber: i, isAnswered } = useSelector((state) => state.questions);
+  const [time] = useTimer();
   const history = useHistory();
 
   function handleClick() {
@@ -19,7 +21,7 @@ function NextButton() {
     }
   }
   return (
-    isAnswered
+    (isAnswered || time === 0)
     && (
       <button type="button" onClick={ handleClick } data-testid="btn-next">
         Next

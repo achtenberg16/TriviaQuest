@@ -12,5 +12,7 @@ export const HARD_POINT = 3;
 export const MEDIUM_POINT = 2;
 export const EASY_POINT = 1;
 export const NUMBER_OF_QUESTIONS = 4;
+export const BAD_FEEDBACK = 'Could be better...';
+export const GOOD_FEEDBACK = 'Well Done!';
 
 export default REGEX_VALIDATION;

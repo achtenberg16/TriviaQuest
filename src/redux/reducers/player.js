@@ -4,7 +4,7 @@ const player = createSlice({
   name: 'player',
   initialState: {
     name: '',
-    assertions: '',
+    assertions: 0,
     score: '',
     gravatarEmail: '',
   },
@@ -18,8 +18,11 @@ const player = createSlice({
     setScore(state, action) {
       state.score = action.payload;
     },
+    setAssertions(state, action) {
+      state.assertions = action.payload;
+    },
   },
 });
 
-export const { setEmail, setName, setScore } = player.actions;
+export const { setEmail, setName, setScore, setAssertions } = player.actions;
 export default player.reducer;
