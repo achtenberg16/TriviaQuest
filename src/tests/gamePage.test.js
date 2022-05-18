@@ -31,7 +31,7 @@ describe('1 - Game Screen', () => {
   it('check if the questions are on the screen', async() => {
     expect(await screen.findByTestId(/wrong-answer/)).toBeVisible()
     expect(await screen.findByTestId(/correct-answer/)).toBeVisible()
-    userEvent.click(screen.getByTestId(/correct-answer/));
+    userEvent.click(screen.getByTestId(/wrong-answer/));
     expect((await screen.findByTestId(/wrong-answer/)).classList[0]).toBe('incorrect-answer')
     expect((await screen.findByTestId(/correct-answer/)).classList[0]).toBe('correct-answer')
     expect(screen.getByTestId(/correct-answer/)).toHaveAttribute('disabled')
@@ -56,4 +56,17 @@ describe('2 - Game Screen', () => {
     userEvent.click(screen.getByTestId(TEST_ID.buttonPlay));
     expect(await screen.findByText(/Play/i)).toBeVisible()
   })
+  it('assertions store is correct', async() => {
+    global.fetch = jest.fn();
+    fetch.mockResolvedValueOnce(mockFetchToken).mockResolvedValueOnce({json: async () => questionsResponse});
+    const { store } = renderWithRouter(<App />)
+    userEvent.type(screen.getByTestId(TEST_ID.inputName), VALUES.name);
+    userEvent.type(screen.getByTestId(TEST_ID.inputEmail), VALUES.email);
+    userEvent.click(screen.getByTestId(TEST_ID.buttonPlay));
+    userEvent.click(await screen.findByTestId(/correct-answer/))
+    userEvent.click(screen.getByTestId('btn-next'))
+    const assertions = store.getState().player.assertions
+    expect(assertions).toBe(1)
+  })
 })
+
