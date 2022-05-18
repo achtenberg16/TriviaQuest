@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../Components/Header';
 import Questions from '../Components/Questions';
+import Timer from '../Components/Timer';
 import { INVALID_TOKEN_CODE } from '../helpers/constants';
 import { setQuestions } from '../redux/reducers/questions';
 import store from '../redux/store';
@@ -32,6 +33,7 @@ function Game() {
     <div>
       <Header />
       <Questions />
+      <Timer />
     </div>
   );
 }

@@ -33,6 +33,7 @@ function Questions() {
         <p data-testid="question-category">{results[i].category}</p>
         <h1 data-testid="question-text">{results[i].question}</h1>
         <div data-testid="answer-options" />
+        {console.log(answersShuffled) }
         {answersShuffled.map((ans) => {
           let testid = 'correct-answer';
           if (ans !== results[i].correct_answer) {

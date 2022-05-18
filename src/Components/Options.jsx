@@ -4,7 +4,7 @@ import '../App.css';
 
 function Options(props) {
   const { answer, testid, handleClick, isAnswered } = props;
-  console.log(isAnswered);
+
   let className = 'incorrect-answer';
   if (testid.includes('correct')) {
     className = 'correct-answer';
