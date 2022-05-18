@@ -11,7 +11,7 @@ function Timer() {
   //     return () => clearInterval(interval);
   //   }, []);
   return (
-    <p>{time}</p>
+    <p>ola</p>
   );
 }
 

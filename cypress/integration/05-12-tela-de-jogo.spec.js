@@ -50,7 +50,7 @@ describe('5 - [TELA DE JOGO] Crie um _header_ que deve conter as informações d
   });
 });
 
-describe('6 - [TELA DE JOGO] Crie a página de jogo que deve conter as informações relacionadas à pergunta', () => {
+describe.only('6 - [TELA DE JOGO] Crie a página de jogo que deve conter as informações relacionadas à pergunta', () => {
   const loadQuestionsPage = () => {
     cy.visit('http://localhost:3000/', {
       onBeforeLoad(win) {
@@ -104,17 +104,16 @@ describe('6 - [TELA DE JOGO] Crie a página de jogo que deve conter as informaç
       for (let i = 0; i < 5; i += 1) {
         loadQuestionsPage();
         cy.get(ALL_ALTERNATIVES_SELECTOR).then((newAnswersSection) => {
-          console.log(newAnswersSection.children());
-          const newAnswers = Array.from(newAnswersSection.children()).map((answer) => answer.dataset.testid);
-          console.log(newAnswers);
+          console.log(newAnswersSection.prevObject[0].children)
+          const newAnswers = Array.from(newAnswersSection.children()).map((answer,) => {
+          return  answer.dataset.testi});
+  
           const currentIndex = newAnswers.indexOf('correct-answer');
           answersList.push(currentIndex);
         });
       };
     }).then(() => {
       const removeRepeatedList = [...new Set(answersList)];
-      console.log(answersList);
-      console.log(removeRepeatedList);
       expect(removeRepeatedList.length).to.be.greaterThan(1);
     });
   });
