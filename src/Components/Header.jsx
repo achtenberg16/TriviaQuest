@@ -1,10 +1,10 @@
 import React from 'react';
-import md5 from 'crypto-js/md5';
 import { useSelector } from 'react-redux';
+import { generateHash } from '../helpers/functions';
 
 function Header() {
   const { name, score, gravatarEmail } = useSelector((state) => state.player);
-  const hashEmail = md5(gravatarEmail).toString();
+  const hashEmail = generateHash(gravatarEmail);
   return (
     <header>
       <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${hashEmail}` } alt="" />

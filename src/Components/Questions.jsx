@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { shuffleArray, changeScore } from '../helpers/functions';
+import { shuffleArray, changeScore, createMarkup } from '../helpers/functions';
 import Options from './Options';
 import useTimer from '../Hooks/useTimer';
 import store from '../redux/store';
@@ -10,7 +10,7 @@ import { setAssertions } from '../redux/reducers/player';
 
 function Questions() {
   const { results, questionNumber: i } = useSelector((state) => state.questions);
-  const { assertions } = useSelector((state) => state.player);
+  const assertions = useSelector((state) => state.player.assertions);
   const [time] = useTimer();
   const { score } = useSelector((state) => state.player);
   const [answersShuffled, setAnswersShuffled] = useState([]);
@@ -36,8 +36,15 @@ function Questions() {
     (results !== undefined)
     && (
       <div>
-        <p data-testid="question-category">{results[i].category}</p>
-        <h1 data-testid="question-text">{results[i].question}</h1>
+        <p
+          data-testid="question-category"
+          dangerouslySetInnerHTML={ createMarkup(results[i].category) }
+        />
+        <p
+          data-testid="question-text"
+          dangerouslySetInnerHTML={ createMarkup(results[i].question) }
+        />
+
         <div data-testid="answer-options">
           {answersShuffled.map((ans) => {
             let testid = 'correct-answer';
@@ -52,8 +59,9 @@ function Questions() {
               handleClick={ () => handleClick(testid) }
             />);
           })}
+
         </div>
-        {time}
+        { time }
         {' '}
         <NextButton />
       </div>)

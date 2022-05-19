@@ -1,3 +1,4 @@
+import md5 from 'crypto-js/md5';
 import { setScore } from '../redux/reducers/player';
 import store from '../redux/store';
 import { CONSTANT_POINT, EASY_POINT, HARD_POINT, MEDIUM_POINT } from './constants';
@@ -21,4 +22,12 @@ export function changeScore(time, difficulty, score) {
     break;
   }
   store.dispatch(setScore(+score + CONSTANT_POINT + (time * value)));
+}
+
+export function generateHash(email) {
+  return md5(email).toString();
+}
+
+export function createMarkup(html) {
+  return { __html: html };
 }

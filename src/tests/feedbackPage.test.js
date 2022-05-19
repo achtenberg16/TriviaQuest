@@ -40,15 +40,6 @@ describe('3 - Feedback Screen', () => {
     expect(await screen.findByText(/Alessandro/i)).toBeVisible()
   })
 
-  it('redirects to feedback screen', async () => {
-    for (let i = 0; i < VALUES.numberOfQuestions; i+=1) {
-        userEvent.click(await screen.findByTestId(/correct-answer/));
-        userEvent.click(screen.getByTestId(TEST_ID.buttonNext))
-    }
-    userEvent.click(await screen.findByTestId(TEST_ID.feedbackText))
-    expect(screen.getByTestId(TEST_ID.feedbackText).innerHTML).toBe(VALUES.goodText);
-  })
-
   it('play again button redirects', async () => {
     jest.setTimeout(50000)
     for (let i = 0; i < VALUES.numberOfQuestions; i+=1) {
@@ -61,6 +52,15 @@ describe('3 - Feedback Screen', () => {
     expect(screen.getByTestId(TEST_ID.feedbackText).innerHTML).toBe(VALUES.badText);
     userEvent.click(await screen.findByTestId(TEST_ID.playAgain))
     expect(screen.getByTestId(TEST_ID.inputName)).toBeInTheDocument();
+  })
+
+  it('redirects to feedback screen', async () => {
+    for (let i = 0; i < VALUES.numberOfQuestions; i+=1) {
+        userEvent.click(await screen.findByTestId(/correct-answer/));
+        userEvent.click(screen.getByTestId(TEST_ID.buttonNext))
+    }
+    userEvent.click(await screen.findByTestId(TEST_ID.feedbackText))
+    expect(screen.getByTestId(TEST_ID.feedbackText).innerHTML).toBe(VALUES.goodText);
   })
 
   it('redirects to ranking screen', async () => {
