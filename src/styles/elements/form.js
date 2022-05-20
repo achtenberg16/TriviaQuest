@@ -9,9 +9,10 @@ width: 350px;
 height: 397px;
 background-color: var(--purple-primary);
 margin: 0 auto;
-margin-top: 185px;
+margin-top: 150px;
 border-radius 40px;
-gap: 13px
+border-color: -internal-light-dark(#AFAFAF), #AFAFAF);
+gap: 14px
 `;
 
 export default Form;

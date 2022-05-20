@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { InputLogin } from '../styles/elements/Input';
 
-function Input({ type, name, value, onChange, placeholder, testID, labelText }) {
+function Input({ type, name, value, onChange, testID, labelText }) {
   return (
     <label htmlFor={ testID }>
       {labelText}
-      <input
+      <InputLogin
         id={ testID }
         data-testid={ testID }
         type={ type }
         name={ name }
         value={ value }
         onChange={ onChange }
-        placeholder={ placeholder }
       />
     </label>
   );
@@ -23,7 +23,6 @@ Input.propTypes = {
   name: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
-  placeholder: PropTypes.string,
   testID: PropTypes.string,
   text: PropTypes.string,
 }.isRequired;

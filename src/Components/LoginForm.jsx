@@ -8,6 +8,9 @@ import store from '../redux/store';
 import Input from './Input';
 import { setQuestionNumber } from '../redux/reducers/questions';
 import { Form } from '../styles/elements/form';
+import PlayEnabled from '../images/PlayEnabled.svg';
+import PlayDisabled from '../images/PlayDisabled.svg';
+import Settings from '../images/Settings.svg';
 
 function LoginForm() {
   const [playerInfos, setPlayerInfos] = useState({
@@ -57,37 +60,40 @@ function LoginForm() {
         onChange={ handleChange }
         value={ playerInfos.name }
         name="name"
-        placeholder="Digite seu Nome:"
       />
 
       <Input
         labelText="Email"
-        type="text"
+        type="email"
         testID="input-gravatar-email"
         onChange={ handleChange }
         value={ playerInfos.email }
         name="email"
-        placeholder="Digite seu e-mail"
       />
 
       <button
         type="submit"
         data-testid="btn-play"
         disabled={ isButtonDisabled }
+
       >
-        Play
+        <img
+          src={ isButtonDisabled ? PlayDisabled : PlayEnabled }
+          alt="Play"
+          width="148px"
+        />
       </button>
 
       <button
         data-testid="btn-settings"
         type="button"
         onClick={ () => history.push('/settings') }
-        className="bg-[#EFE91D] text-black
-                rounded pt-1 pb-1 pl-5 pr-5 w-36 self-center
-                font-semibold cursor-pointer
-                disabled:cursor-not-allowed disabled:opacity-75"
+
       >
-        settings
+        <img
+          src={ Settings }
+          alt="Play"
+        />
       </button>
     </Form>
   );

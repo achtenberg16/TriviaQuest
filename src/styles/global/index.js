@@ -5,7 +5,7 @@ const Reset = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Fredoka', sans-serif;
     letter-spacing: 1.4px;
   }
 
@@ -26,6 +26,14 @@ const Reset = createGlobalStyle`
     flex-direction: column;
     width: 219px;
     font-weight: 600;
+  }
+  button{
+    background-color: var(--purple-primary);
+    border-style: none;
+  }
+  button:hover{
+    cursor: pointer;
+    margin-left: -8px
   }
   body {
     width: 100vw;
