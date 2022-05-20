@@ -3,15 +3,18 @@ import FeedbackMsg from '../Components/FeedbackMsg';
 import Header from '../Components/Header';
 import PlayAgainBtn from '../Components/PlayAgainBtn';
 import RankingBtn from '../Components/RankingBtn';
+import { MainContainerFeedback } from '../styles/elements/Feedback';
 
 function Feedback() {
   return (
-    <div>
+    <>
       <Header />
-      <FeedbackMsg />
-      <PlayAgainBtn />
-      <RankingBtn />
-    </div>);
+      <MainContainerFeedback>
+        <FeedbackMsg />
+        <PlayAgainBtn />
+        <RankingBtn />
+      </MainContainerFeedback>
+    </>);
 }
 
 export default Feedback;

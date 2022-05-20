@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { generateHash } from '../helpers/functions';
 import { getLocalStorage, setLocalStorage } from '../services/localStorage';
+import Ranking from '../images/Ranking.svg';
 
 function RankingBtn() {
   const history = useHistory();
@@ -23,8 +24,9 @@ function RankingBtn() {
       type="button"
       data-testid="btn-ranking"
       onClick={ () => history.push('/ranking') }
+      style={ { backgroundColor: 'transparent' } }
     >
-      Ranking
+      <img src={ Ranking } alt="" />
     </button>
   );
 }
