@@ -79,6 +79,10 @@ function LoginForm() {
         data-testid="btn-settings"
         type="button"
         onClick={ () => history.push('/settings') }
+        className="bg-[#EFE91D] text-black
+                rounded pt-1 pb-1 pl-5 pr-5 w-36 self-center
+                font-semibold cursor-pointer
+                disabled:cursor-not-allowed disabled:opacity-75"
       >
         settings
       </button>
