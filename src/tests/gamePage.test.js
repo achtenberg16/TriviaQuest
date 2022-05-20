@@ -32,8 +32,8 @@ describe('1 - Game Screen', () => {
     expect(await screen.findByTestId(/wrong-answer/)).toBeVisible()
     expect(await screen.findByTestId(/correct-answer/)).toBeVisible()
     userEvent.click(screen.getByTestId(/wrong-answer/));
-    expect((await screen.findByTestId(/wrong-answer/)).classList[0]).toBe('incorrect-answer')
-    expect((await screen.findByTestId(/correct-answer/)).classList[0]).toBe('correct-answer')
+    expect((await screen.findByTestId(/wrong-answer/)).classList.contains('incorrect-answer')).toBe(true)
+    expect((await screen.findByTestId(/correct-answer/)).classList.contains('correct-answer')).toBe(true)
     expect(screen.getByTestId(/correct-answer/)).toHaveAttribute('disabled')
    })
 
@@ -54,7 +54,7 @@ describe('2 - Game Screen', () => {
     userEvent.type(screen.getByTestId(TEST_ID.inputName), VALUES.name);
     userEvent.type(screen.getByTestId(TEST_ID.inputEmail), VALUES.email);
     userEvent.click(screen.getByTestId(TEST_ID.buttonPlay));
-    expect(await screen.findByText(/Play/i)).toBeVisible()
+    expect(await screen.findByTestId(TEST_ID.buttonPlay)).toBeVisible()
   })
   
   it('assertions store is correct', async() => {

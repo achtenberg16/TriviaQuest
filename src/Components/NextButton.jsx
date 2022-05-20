@@ -21,7 +21,6 @@ function NextButton() {
       store.dispatch(setQuestionNumber(i + 1));
     }
   }
-  console.log(time, isAnswered);
   return (
     (isAnswered || time === 0)
      && (
