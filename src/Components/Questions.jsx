@@ -7,6 +7,8 @@ import store from '../redux/store';
 import NextButton from './NextButton';
 import { setIsAnswered } from '../redux/reducers/questions';
 import { setAssertions } from '../redux/reducers/player';
+import CardQuestion from './CardQuestion';
+import { MainContainerQuestion, OptionsContainer } from '../styles/elements/CardQuestion';
 
 function Questions() {
   const { results, questionNumber: i } = useSelector((state) => state.questions);
@@ -35,36 +37,36 @@ function Questions() {
   return (
     (results !== undefined)
     && (
-      <div>
-        <p
-          data-testid="question-category"
-          dangerouslySetInnerHTML={ createMarkup(results[i].category) }
-        />
-        <p
-          data-testid="question-text"
-          dangerouslySetInnerHTML={ createMarkup(results[i].question) }
-        />
+      <>
+        <MainContainerQuestion>
+          <CardQuestion
+            category={ createMarkup(results[i].category) }
+            question={ createMarkup(results[i].question) }
+            indexQuestion={ i }
+            totalQuestions={ results.length }
+          />
 
-        <div data-testid="answer-options">
-          {answersShuffled.map((ans) => {
-            let testid = 'correct-answer';
-            if (ans !== results[i].correct_answer) {
-              testid = `wrong-answer-${index}`;
-              index += 1;
-            }
-            return (<Options
-              key={ ans }
-              answer={ ans }
-              testid={ testid }
-              handleClick={ () => handleClick(testid) }
-            />);
-          })}
+          <OptionsContainer data-testid="answer-options">
+            {answersShuffled.map((ans) => {
+              let testid = 'correct-answer';
+              if (ans !== results[i].correct_answer) {
+                testid = `wrong-answer-${index}`;
+                index += 1;
+              }
+              return (<Options
+                key={ ans }
+                answer={ ans }
+                testid={ testid }
+                handleClick={ () => handleClick(testid) }
+              />);
+            })}
 
-        </div>
-        { time }
-        {' '}
+          </OptionsContainer>
+          {' '}
+        </MainContainerQuestion>
         <NextButton />
-      </div>)
+      </>
+    )
 
   );
 }

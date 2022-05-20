@@ -6,9 +6,8 @@ display: flex;
 justify-content: center;
 align-items: center; 
 width: 950px;
-height: 100px;
-margin: 0 auto;
-margin-top: 43px;
+height: 90px;
+margin: 30px auto;
 border-radius: 50px;
 `;
 
@@ -18,11 +17,11 @@ justify-content: space-around;
 align-items: center;
 width: 590px;
 color: var(--yellow);
-font-size: 32px;
-font-weight: 800;
+font-size: 30px;
+font-weight: 600;
 `;
 
 export const ImgHeader = style.img`
 border-radius: 50%;
-width: 76px
+width: 65px
 `;

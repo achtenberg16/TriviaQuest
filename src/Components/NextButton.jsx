@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import useTimer from '../Hooks/useTimer';
 import { setIsAnswered, setQuestionNumber } from '../redux/reducers/questions';
 import store from '../redux/store';
+import { NextButtonStyled } from '../styles/elements/CardQuestion';
 
 function NextButton() {
   const { results, questionNumber: i,
@@ -20,12 +21,13 @@ function NextButton() {
       store.dispatch(setQuestionNumber(i + 1));
     }
   }
+  console.log(time, isAnswered);
   return (
     (isAnswered || time === 0)
-    && (
-      <button type="button" onClick={ handleClick } data-testid="btn-next">
-        Next
-      </button>)
+     && (
+       <NextButtonStyled type="button" onClick={ handleClick } data-testid="btn-next">
+         Next
+       </NextButtonStyled>)
   );
 }
 
