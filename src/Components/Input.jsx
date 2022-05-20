@@ -1,16 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Input({ type, name, value, onChange, placeholder, testID }) {
+function Input({ type, name, value, onChange, placeholder, testID, labelText }) {
   return (
-    <input
-      data-testid={ testID }
-      type={ type }
-      name={ name }
-      value={ value }
-      onChange={ onChange }
-      placeholder={ placeholder }
-    />
+    <label htmlFor={ testID }>
+      {labelText}
+      <input
+        id={ testID }
+        data-testid={ testID }
+        type={ type }
+        name={ name }
+        value={ value }
+        onChange={ onChange }
+        placeholder={ placeholder }
+      />
+    </label>
   );
 }
 
@@ -21,6 +25,7 @@ Input.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   testID: PropTypes.string,
+  text: PropTypes.string,
 }.isRequired;
 
 export default Input;

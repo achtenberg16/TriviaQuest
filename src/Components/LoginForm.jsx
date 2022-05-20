@@ -7,6 +7,7 @@ import { setEmail, setName, setAssertions, setScore } from '../redux/reducers/pl
 import store from '../redux/store';
 import Input from './Input';
 import { setQuestionNumber } from '../redux/reducers/questions';
+import { Form } from '../styles/elements/form';
 
 function LoginForm() {
   const [playerInfos, setPlayerInfos] = useState({
@@ -47,9 +48,10 @@ function LoginForm() {
     history.push('/game');
   }
   return (
-    <form type="submit" onSubmit={ handleSubmit }>
+    <Form type="submit" onSubmit={ handleSubmit }>
 
       <Input
+        labelText="Nome"
         type="text"
         testID="input-player-name"
         onChange={ handleChange }
@@ -59,6 +61,7 @@ function LoginForm() {
       />
 
       <Input
+        labelText="Email"
         type="text"
         testID="input-gravatar-email"
         onChange={ handleChange }
@@ -82,7 +85,7 @@ function LoginForm() {
       >
         settings
       </button>
-    </form>
+    </Form>
   );
 }
 

@@ -4,10 +4,12 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store';
 import App from './App';
+import Reset from './styles/global/index';
 
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={ store }>
+      <Reset />
       <App />
     </Provider>
   </BrowserRouter>,
