@@ -1,11 +1,17 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import { resetQuery } from '../helpers/functions';
 import { getLocalStorage } from '../services/localStorage';
 
 function Ranking() {
   const history = useHistory();
   const ranking = JSON.parse(getLocalStorage('ranking'));
   ranking.sort((a, b) => b.score - a.score);
+
+  function handleClick() {
+    resetQuery();
+    history.push('/');
+  }
 
   return (
     <div>
@@ -22,7 +28,7 @@ function Ranking() {
       <button
         type="button"
         data-testid="btn-go-home"
-        onClick={ () => history.push('/') }
+        onClick={ handleClick }
       >
         Play Again
       </button>

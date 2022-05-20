@@ -1,5 +1,6 @@
 import md5 from 'crypto-js/md5';
 import { setScore } from '../redux/reducers/player';
+import { setQuery } from '../redux/reducers/questions';
 import store from '../redux/store';
 import { CONSTANT_POINT, EASY_POINT, HARD_POINT, MEDIUM_POINT } from './constants';
 
@@ -30,4 +31,8 @@ export function generateHash(email) {
 
 export function createMarkup(html) {
   return { __html: html };
+}
+
+export function resetQuery() {
+  store.dispatch(setQuery(undefined));
 }

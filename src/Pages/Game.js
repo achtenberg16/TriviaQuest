@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Header from '../Components/Header';
 import Questions from '../Components/Questions';
@@ -10,12 +11,13 @@ import { getLocalStorage } from '../services/localStorage';
 
 function Game() {
   const history = useHistory();
+  const { query } = useSelector((state) => state.questions);
 
   useEffect(() => {
     const token = getLocalStorage('token');
 
     async function getQuestions() {
-      const { response_code: code, results } = await fetchQuestions(token);
+      const { response_code: code, results } = await fetchQuestions(token, query);
 
       if (code === INVALID_TOKEN_CODE) {
         history.push('/');
@@ -26,7 +28,7 @@ function Game() {
     }
 
     getQuestions();
-  }, [history]);
+  }, [history, query]);
 
   return (
     <div>
