@@ -43,34 +43,50 @@ function Settings() {
       <H1Settings data-testid="settings-title">
         Settings
       </H1Settings>
-      <Select
-        id="quantity"
-        onChange={ ({ target }) => setAmount(target.value) }
-      >
-        {NUMBER_CHOICE.map(({ name, id }) => (
-          <option key={ name } value={ id }>{ name }</option>))}
-      </Select>
-      <Select
-        id="category"
-        onChange={ ({ target }) => setCategorySelected(target.value) }
-      >
-        {categories.map(({ name, id }) => (
-          <option key={ name } value={ id }>{ name }</option>))}
-      </Select>
-      <Select
-        id="difficulty"
-        onChange={ ({ target }) => setDifficultySelected(target.value) }
-      >
-        {DIFFICULTIES.map(({ name, id }) => (
-          <option key={ name } value={ id }>{ name }</option>))}
-      </Select>
-      <Select
-        id="type"
-        onChange={ ({ target }) => setTypeSelected(target.value) }
-      >
-        {QUESTIONS_TYPE.map(({ name, id }) => (
-          <option key={ name } value={ id }>{ name }</option>))}
-      </Select>
+
+      <label htmlFor="quantity">
+        Amount:
+        <Select
+          id="quantity"
+          onChange={ ({ target }) => setAmount(target.value) }
+        >
+          {NUMBER_CHOICE.map(({ name, id }) => (
+            <option key={ name } value={ id }>{ name }</option>))}
+        </Select>
+      </label>
+
+      <label htmlFor="category">
+        Category:
+        <Select
+          id="category"
+          onChange={ ({ target }) => setCategorySelected(target.value) }
+        >
+          {categories.map(({ name, id }) => (
+            <option key={ name } value={ id }>{ name }</option>))}
+        </Select>
+      </label>
+
+      <label htmlFor="Difficulty">
+        Difficulty:
+        <Select
+          id="difficulty"
+          onChange={ ({ target }) => setDifficultySelected(target.value) }
+        >
+          {DIFFICULTIES.map(({ name, id }) => (
+            <option key={ name } value={ id }>{ name }</option>))}
+        </Select>
+      </label>
+
+      <label htmlFor="type">
+        Type:
+        <Select
+          id="type"
+          onChange={ ({ target }) => setTypeSelected(target.value) }
+        >
+          {QUESTIONS_TYPE.map(({ name, id }) => (
+            <option key={ name } value={ id }>{ name }</option>))}
+        </Select>
+      </label>
 
       <button
         type="button"

@@ -6,7 +6,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 width: 350px;
-height: 397px;
+height: 480px;
 background-color: var(--purple-primary);
 margin: 0 auto;
 margin-top: 150px;
@@ -16,7 +16,7 @@ gap: 14px
 `;
 
 export const Select = style.select`
-width: 80%;
+width: 100%;
 height:  40px;
 background-color: var(--purple-secondary);
 color: white;
