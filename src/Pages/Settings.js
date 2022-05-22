@@ -5,6 +5,8 @@ import { ANY_CATEGORY, DIFFICULTIES,
 import { setQuery } from '../redux/reducers/questions';
 import store from '../redux/store';
 import { fetchCategories } from '../services/api';
+import { CardSettings, H1Settings, Select } from '../styles/elements/CardSettings';
+import saveButton from '../images/saveButon.svg';
 
 function Settings() {
   const [categories, setCategories] = useState(ANY_CATEGORY);
@@ -37,46 +39,46 @@ function Settings() {
   }
 
   return (
-    <div>
-      <h1 data-testid="settings-title">
+    <CardSettings>
+      <H1Settings data-testid="settings-title">
         Settings
-      </h1>
-      <select
+      </H1Settings>
+      <Select
         id="quantity"
         onChange={ ({ target }) => setAmount(target.value) }
       >
         {NUMBER_CHOICE.map(({ name, id }) => (
           <option key={ name } value={ id }>{ name }</option>))}
-      </select>
-      <select
+      </Select>
+      <Select
         id="category"
         onChange={ ({ target }) => setCategorySelected(target.value) }
       >
         {categories.map(({ name, id }) => (
           <option key={ name } value={ id }>{ name }</option>))}
-      </select>
-      <select
+      </Select>
+      <Select
         id="difficulty"
         onChange={ ({ target }) => setDifficultySelected(target.value) }
       >
         {DIFFICULTIES.map(({ name, id }) => (
           <option key={ name } value={ id }>{ name }</option>))}
-      </select>
-      <select
+      </Select>
+      <Select
         id="type"
         onChange={ ({ target }) => setTypeSelected(target.value) }
       >
         {QUESTIONS_TYPE.map(({ name, id }) => (
           <option key={ name } value={ id }>{ name }</option>))}
-      </select>
+      </Select>
 
       <button
         type="button"
         onClick={ () => saveChanges() }
       >
-        Save Changes
+        <img src={ saveButton } alt="save" />
       </button>
-    </div>
+    </CardSettings>
   );
 }
 
